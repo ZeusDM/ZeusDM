@@ -1,2 +1,1 @@
-# ZeusDM
-zeus.sty
+# zeus.sty
