@@ -1,1 +1,1 @@
-# zeus.sty
+# Zeus's Package for LaTeX
