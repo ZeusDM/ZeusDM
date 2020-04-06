@@ -1,0 +1,460 @@
+\ProvidesPackage{zeus-amsthm}[2020/03/27 Zeus's amsthm Package]
+
+% This package creates commonly used theorem-like environments, with easy setup for new patterns.
+
+% \DeclareOption{...}{...}
+
+% global / chapter / section
+
+\newif\ifzeus@amsthmglobal
+\newif\ifzeus@amsthmchapter
+\newif\ifzeus@amsthmsection
+
+\DeclareOption{global}{	\zeus@amsthmglobaltrue
+						\zeus@amsthmchapterfalse
+						\zeus@amsthmsectionfalse}
+
+\DeclareOption{chapter}{\zeus@amsthmglobalfalse
+						\zeus@amsthmchaptertrue
+						\zeus@amsthmsectionflase}
+
+\DeclareOption{section}{\zeus@amsthmglobalfalse
+						\zeus@amsthmchapterfalse
+						\zeus@amsthmsectiontrue}
+
+% stylish / classic / obm / obmtwo
+
+\newif\ifzeus@amsthmstylish
+\newif\ifzeus@amsthmclassic
+\newif\ifzeus@amsthmobm
+\newif\ifzeus@amsthmobmtwo
+
+\DeclareOption{stylish}{\zeus@amsthmstylishtrue
+						\zeus@amsthmclassicfalse
+						\zeus@amsthmobmfalse
+						\zeus@amsthmobmtwofalse}
+
+\DeclareOption{classic}{\zeus@amsthmstylishfalse
+						\zeus@amsthmclassictrue
+						\zeus@amsthmobmfalse
+						\zeus@amsthmobmtwofalse}
+
+\DeclareOption{obm}{\zeus@amsthmstylishfalse
+					\zeus@amsthmclassicfalse
+					\zeus@amsthmobmtrue
+					\zeus@amsthmobmtwofalse}
+
+\DeclareOption{obmtwo}{\zeus@amsthmstylishfalse
+						\zeus@amsthmclassicfalse
+						\zeus@amsthmobmfalse
+						\zeus@amsthmobmtwotrue}
+
+\ExecuteOptions{stylish}
+\ProcessOptions\relax
+
+% \RequirePackage{...}
+
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+\RequirePackage{zeus-translate}
+
+\ifzeus@amsthmstylish
+	\RequirePackage{zeus-color}
+	\providecommand{\defaultheadfont}{\bfseries\color{main}}
+\fi
+\ifzeus@amsthmobm
+	\declaretheoremstyle[
+		spaceabove = \topsep, spacebelow=\topsep,
+		headfont = \bfseries\small,
+		notefont = \bfseries\small, notebraces={(}{)},
+		bodyfont = \normalfont,
+		postheadspace = 0.5em,
+		headpunct = \\,
+	    headformat = {\hspace{-1em}$\blacktriangleright$\ {\MakeUppercase{\problemname}}\nobreakspace\NUMBER \NOTE} % Optional theorem note
+	    ]{obmstyle}
+	\providecommand{\styleprob}{obmstyle}
+\fi
+\ifzeus@amsthmobmtwo
+	\declaretheoremstyle[
+		spaceabove = \topsep, spacebelow=\topsep,
+		headfont = \bfseries\small,
+		notefont = \bfseries\small, notebraces={(}{)},
+		bodyfont = \normalfont,
+		postheadspace = 0.5em,
+		headpunct = \\,
+	    headformat = {{\MakeUppercase{\problemname}}\nobreakspace\NUMBER \NOTE} % Optional theorem note
+	    ]{obmstyle}
+	\providecommand{\styleprob}{obmstyle}
+\fi
+
+% Theorem Styles
+	% Fixed Theorem Styles
+
+	% Customizable Theorem Styles
+
+		\providecommand{\defaultheadfont}{\bfseries}
+
+		% customthm
+			\newlength\spaceabovethm
+			\setlength\spaceabovethm{\topsep}
+			\newlength\spacebelowthm
+			\setlength\spacebelowthm{\topsep}
+			\newlength\indentabovethm
+			\setlength\indentabovethm{0pt}
+			\newlength\postheadspacethm
+			\setlength\postheadspacethm{0.5em}
+			\providecommand{\fontthm}{}
+			\providecommand{\headfontthm}{\defaultheadfont}
+			\providecommand{\notefontthm}{}
+			\providecommand{\stylethm}{customthm}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovethm, spacebelow=\spacebelowthm,
+			    headfont=\headfontthm,
+			    notefont=\notefontthm, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacethm,
+			    qed=,
+			    headpunct = .
+			    ]{customthm}
+
+		% customlem
+			\newlength\spaceabovelem
+			\setlength\spaceabovelem{\topsep}
+			\newlength\spacebelowlem
+			\setlength\spacebelowlem{\topsep}
+			\newlength\indentabovelem
+			\setlength\indentabovelem{0pt}
+			\newlength\postheadspacelem
+			\setlength\postheadspacelem{0.5em}
+			\providecommand{\fontlem}{}
+			\providecommand{\headfontlem}{\defaultheadfont}
+			\providecommand{\notefontlem}{}
+			\providecommand{\stylelem}{customlem}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovelem, spacebelow=\spacebelowlem,
+			    headfont=\headfontlem,
+			    notefont=\notefontlem, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacelem,
+			    qed=,
+			    headpunct = .
+			    ]{customlem}
+
+		% customprop
+			\newlength\spaceaboveprop
+			\setlength\spaceaboveprop{\topsep}
+			\newlength\spacebelowprop
+			\setlength\spacebelowprop{\topsep}
+			\newlength\indentaboveprop
+			\setlength\indentaboveprop{0pt}
+			\newlength\postheadspaceprop
+			\setlength\postheadspaceprop{0.5em}
+			\providecommand{\fontprop}{}
+			\providecommand{\headfontprop}{\defaultheadfont}
+			\providecommand{\notefontprop}{}
+			\providecommand{\styleprop}{customprop}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveprop, spacebelow=\spacebelowprop,
+			    headfont=\headfontprop,
+			    notefont=\notefontprop, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceprop,
+			    qed=,
+			    headpunct = .
+			    ]{customprop}
+
+		% customcor
+			\newlength\spaceabovecor
+			\setlength\spaceabovecor{\topsep}
+			\newlength\spacebelowcor
+			\setlength\spacebelowcor{\topsep}
+			\newlength\indentabovecor
+			\setlength\indentabovecor{0pt}
+			\newlength\postheadspacecor
+			\setlength\postheadspacecor{0.5em}
+			\providecommand{\fontcor}{}
+			\providecommand{\headfontcor}{\defaultheadfont}
+			\providecommand{\notefontcor}{}
+			\providecommand{\stylecor}{customcor}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovecor, spacebelow=\spacebelowcor,
+			    headfont=\headfontcor,
+			    notefont=\notefontcor, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacecor,
+			    qed=,
+			    headpunct = .
+			    ]{customcor}
+
+		% customdefn
+			\newlength\spaceabovedefn
+			\setlength\spaceabovedefn{\topsep}
+			\newlength\spacebelowdefn
+			\setlength\spacebelowdefn{\topsep}
+			\newlength\indentabovedefn
+			\setlength\indentabovedefn{0pt}
+			\newlength\postheadspacedefn
+			\setlength\postheadspacedefn{0.5em}
+			\providecommand{\fontdefn}{}
+			\providecommand{\headfontdefn}{\defaultheadfont}
+			\providecommand{\notefontdefn}{}
+			\providecommand{\styledefn}{customdefn}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovedefn, spacebelow=\spacebelowdefn,
+			    headfont=\headfontdefn,
+			    notefont=\notefontdefn, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacedefn,
+			    qed=,
+			    headpunct = .
+			    ]{customdefn}
+
+		% customconj
+			\newlength\spaceaboveconj
+			\setlength\spaceaboveconj{\topsep}
+			\newlength\spacebelowconj
+			\setlength\spacebelowconj{\topsep}
+			\newlength\indentaboveconj
+			\setlength\indentaboveconj{0pt}
+			\newlength\postheadspaceconj
+			\setlength\postheadspaceconj{0.5em}
+			\providecommand{\fontconj}{}
+			\providecommand{\headfontconj}{\defaultheadfont}
+			\providecommand{\notefontconj}{}
+			\providecommand{\styleconj}{customconj}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveconj, spacebelow=\spacebelowconj,
+			    headfont=\headfontconj,
+			    notefont=\notefontconj, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceconj,
+			    qed=,
+			    headpunct = .
+			    ]{customconj}
+
+		% customalg
+			\newlength\spaceabovealg
+			\setlength\spaceabovealg{\topsep}
+			\newlength\spacebelowalg
+			\setlength\spacebelowalg{\topsep}
+			\newlength\indentabovealg
+			\setlength\indentabovealg{0pt}
+			\newlength\postheadspacealg
+			\setlength\postheadspacealg{0.5em}
+			\providecommand{\fontalg}{}
+			\providecommand{\headfontalg}{\defaultheadfont}
+			\providecommand{\notefontalg}{}
+			\providecommand{\stylealg}{customalg}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovealg, spacebelow=\spacebelowalg,
+			    headfont=\headfontalg,
+			    notefont=\notefontalg, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacealg,
+			    qed=,
+			    headpunct = .
+			    ]{customalg}
+
+		% customexmp
+			\newlength\spaceaboveexmp
+			\setlength\spaceaboveexmp{\topsep}
+			\newlength\spacebelowexmp
+			\setlength\spacebelowexmp{\topsep}
+			\newlength\indentaboveexmp
+			\setlength\indentaboveexmp{0pt}
+			\newlength\postheadspaceexmp
+			\setlength\postheadspaceexmp{0.5em}
+			\providecommand{\fontexmp}{}
+			\providecommand{\headfontexmp}{\defaultheadfont}
+			\providecommand{\notefontexmp}{}
+			\providecommand{\styleexmp}{customexmp}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveexmp, spacebelow=\spacebelowexmp,
+			    headfont=\headfontexmp,
+			    notefont=\notefontexmp, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceexmp,
+			    qed=,
+			    headpunct = .
+			    ]{customexmp}
+
+		% customprob
+			\newlength\spaceaboveprob
+			\setlength\spaceaboveprob{\topsep}
+			\newlength\spacebelowprob
+			\setlength\spacebelowprob{\topsep}
+			\newlength\indentaboveprob
+			\setlength\indentaboveprob{0pt}
+			\newlength\postheadspaceprob
+			\setlength\postheadspaceprob{0.5em}
+			\providecommand{\fontprob}{}
+			\providecommand{\headfontprob}{\defaultheadfont}
+			\providecommand{\notefontprob}{}
+			\providecommand{\styleprob}{customprob}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveprob, spacebelow=\spacebelowprob,
+			    headfont=\headfontprob,
+			    notefont=\notefontprob, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceprob,
+			    qed=,
+			    headpunct = .
+			    ]{customprob}
+
+		% customrem
+			\newlength\spaceaboverem
+			\setlength\spaceaboverem{\topsep}
+			\newlength\spacebelowrem
+			\setlength\spacebelowrem{\topsep}
+			\newlength\indentaboverem
+			\setlength\indentaboverem{0pt}
+			\newlength\postheadspacerem
+			\setlength\postheadspacerem{0.5em}
+			\providecommand{\fontrem}{}
+			\providecommand{\headfontrem}{\defaultheadfont}
+			\providecommand{\notefontrem}{}
+			\providecommand{\stylerem}{customrem}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboverem, spacebelow=\spacebelowrem,
+			    headfont=\headfontrem,
+			    notefont=\notefontrem, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacerem,
+			    qed=,
+			    headpunct = .
+			    ]{customrem}
+
+		% customnote
+			\newlength\spaceabovenote
+			\setlength\spaceabovenote{\topsep}
+			\newlength\spacebelownote
+			\setlength\spacebelownote{\topsep}
+			\newlength\indentabovenote
+			\setlength\indentabovenote{0pt}
+			\newlength\postheadspacenote
+			\setlength\postheadspacenote{0.5em}
+			\providecommand{\fontnote}{}
+			\providecommand{\headfontnote}{\defaultheadfont}
+			\providecommand{\notefontnote}{}
+			\providecommand{\stylenote}{customnote}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovenote, spacebelow=\spacebelownote,
+			    headfont=\headfontnote,
+			    notefont=\notefontnote, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacenote,
+			    qed=,
+			    headpunct = .
+			    ]{customnote}
+
+		% customsol
+			\newlength\spaceabovesol
+			\setlength\spaceabovesol{\topsep}
+			\newlength\spacebelowsol
+			\setlength\spacebelowsol{\topsep}
+			\newlength\indentabovesol
+			\setlength\indentabovesol{0pt}
+			\newlength\postheadspacesol
+			\setlength\postheadspacesol{0.5em}
+			\providecommand{\fontsol}{}
+			\providecommand{\headfontsol}{\itshape}
+			\providecommand{\notefontsol}{}
+			\providecommand{\stylesol}{customsol}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovesol, spacebelow=\spacebelowsol,
+			    headfont=\headfontsol,
+			    notefont=\notefontsol, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacesol,
+			    qed=,
+			    headpunct = .
+			    ]{customsol}
+
+		% customans
+			\newlength\spaceaboveans
+			\setlength\spaceaboveans{\topsep}
+			\newlength\spacebelowans
+			\setlength\spacebelowans{\topsep}
+			\newlength\indentaboveans
+			\setlength\indentaboveans{0pt}
+			\newlength\postheadspaceans
+			\setlength\postheadspaceans{0.5em}
+			\providecommand{\fontans}{}
+			\providecommand{\headfontans}{\defaultheadfont}
+			\providecommand{\notefontans}{}
+			\providecommand{\styleans}{customans}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveans, spacebelow=\spacebelowans,
+			    headfont=\headfontans,
+			    notefont=\notefontans, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceans,
+			    qed=,
+			    headpunct = .
+			    ]{customans}
+
+		% customhnt
+			\newlength\spaceabovehnt
+			\setlength\spaceabovehnt{\topsep}
+			\newlength\spacebelowhnt
+			\setlength\spacebelowhnt{\topsep}
+			\newlength\indentabovehnt
+			\setlength\indentabovehnt{0pt}
+			\newlength\postheadspacehnt
+			\setlength\postheadspacehnt{0.5em}
+			\providecommand{\fonthnt}{}
+			\providecommand{\headfonthnt}{\defaultheadfont}
+			\providecommand{\notefonthnt}{}
+			\providecommand{\stylehnt}{customhnt}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovehnt, spacebelow=\spacebelowhnt,
+			    headfont=\headfonthnt,
+			    notefont=\notefonthnt, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacehnt,
+			    qed=,
+			    headpunct = .
+			    ]{customhnt}
+
+		% customdem
+			\newlength\spaceabovedem
+			\setlength\spaceabovedem{\topsep}
+			\newlength\spacebelowdem
+			\setlength\spacebelowdem{\topsep}
+			\newlength\indentabovedem
+			\setlength\indentabovedem{0pt}
+			\newlength\postheadspacedem
+			\setlength\postheadspacedem{0.5em}
+			\providecommand{\fontdem}{}
+			\providecommand{\headfontdem}{\defaultheadfont}
+			\providecommand{\notefontdem}{}
+			\providecommand{\styledem}{customdem}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovedem, spacebelow=\spacebelowdem,
+			    headfont=\headfontdem,
+			    notefont=\notefontdem, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacedem,
+			    qed=,
+			    headpunct = .
+			    ]{customdem}
+
+
+\declaretheorem[style = \stylethm, name = \protect\theoremname]{thm}
+\declaretheorem[style = \stylelem, name = \protect\lemmaname]{lem}
+\declaretheorem[style = \styleprop, name = \protect\propositionname]{prop}
+\declaretheorem[style = \stylecor, name = \protect\corollaryname]{cor}
+\declaretheorem[style = \styledefn, name = \protect\definitionname]{defn}
+\declaretheorem[style = \styleconj, name = \protect\conjecturename]{conj}
+\declaretheorem[style = \stylealg, name = \protect\algorithmname]{alg}
+
+\declaretheorem[style = \styleexmp, name = \protect\examplename]{exmp}
+\declaretheorem[style = \styleprob, name = \protect\problemname]{prob}
+
+\declaretheorem[style = \stylerem, name = \protect\remarkname]{rem}
+\declaretheorem[style = \stylenote, name = \protect\notename]{note}
+
+\declaretheorem[style = \stylesol, name = \protect\solutionname, unnumbered]{sol}
+\declaretheorem[style = \styleans, name = \protect\answername]{ans}
+\declaretheorem[style = \stylehnt, name = \protect\hintname]{hnt}
+\declaretheorem[style = \styledem, name = \protect\proofname]{dem}

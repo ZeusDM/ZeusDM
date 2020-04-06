@@ -1,0 +1,93 @@
+\ProvidesPackage{zeus-problems-db}[2020/03/27 Zeus's Database Input Package]
+
+% \RequirePackage{...}
+
+\RequirePackage{import}
+\RequirePackage{suffix}
+\RequirePackage{zeus-problems-db-folder}	% to previously define \mypath
+\RequirePackage{zeus-shortcuts}			% because some problems use it
+\RequirePackage{zeus-asymptote}			% because some problems use it
+\RequirePackage{zeus-amsthm}				% to previously define
+
+% This package mainly serves as an interface for extracting problems and solutions from the database.
+
+\def\primaryLanguage{pt}
+\def\secondaryLanguage{en}
+
+% Defines how to get exercises and solutions from the database
+
+\newcommand{\IfProblemHasSource}[3]{%
+	\protect\IfFileExists{\mypath problems/#1/source_\primaryLanguage.tex}{#2}{%
+		\protect\IfFileExists{\mypath problems/#1/source_\secondaryLanguage.tex}{#2}{%
+			\protect\IfFileExists{\mypath problems/#1/source.tex}{#2}{%
+				\protect\IfFileExists{\mypath problems/#1/../source_\primaryLanguage.tex}{#2}{%
+					\protect\IfFileExists{\mypath problems/#1/../source_\secondaryLanguage.tex}{#2}{%
+						\protect\IfFileExists{\mypath problems/#1/../source.tex}{#2}{#3}}}}}}%
+}
+
+\newcommand{\IfProblemHasNumber}[3]{%
+	\protect\IfFileExists{\mypath problems/#1/number.tex}{#2}{#3}%
+}
+
+\newcommand{\IfProblemExists}[3]{%
+	\protect\IfFileExists{\mypath problems/#1/problem_\primaryLanguage.tex}{#2}{%
+		\protect\IfFileExists{\mypath problems/#1/problem_\secondaryLanguage.tex}{#2}{#3}%
+	}%
+}
+
+\newcommand{\IfSolutionExists}[3]{%
+	\protect\IfFileExists{\mypath problems/#1/solution_\primaryLanguage.tex}{#2}{%
+		\protect\IfFileExists{\mypath problems/#1/solution_\secondaryLanguage.tex}{#2}{#3}%
+	}%
+}
+
+\newcommand{\problemfoe}[1]{%
+	\protect\IfFileExists{\mypath problems/#1/problem_\primaryLanguage.tex}{\subimport{\mypath problems/#1/}{problem_\primaryLanguage.tex}}{%
+	\protect\IfFileExists{\mypath problems/#1/problem_\secondaryLanguage.tex}{\subimport{\mypath problems/#1/}{problem_\secondaryLanguage.tex}}{\textcolor{red}{Problema \path{#1} não encontrado!}}}%
+}
+
+\newcommand{\solutionfoe}[1]{%
+		\protect\IfFileExists{\mypath problems/#1/solution_\primaryLanguage.tex}{\subimport{\mypath problems/#1/}{solution_\primaryLanguage.tex}}{%
+		\protect\IfFileExists{\mypath problems/#1/solution_\secondaryLanguage.tex}{\subimport{\mypath problems/#1/}{solution_\secondaryLanguage.tex}}{\textcolor{red}{Solução \path{#1} não encontrada!}}}%
+}
+
+\newcommand{\sourcefoe}[1]{%
+		\protect\IfFileExists{\mypath problems/#1/source_\primaryLanguage.tex}{\input{\mypath problems/#1/source_\primaryLanguage.tex}}{%
+		\protect\IfFileExists{\mypath problems/#1/source_\secondaryLanguage.tex}{\input{\mypath problems/#1/source_\secondaryLanguage.tex}}{%
+		\protect\IfFileExists{\mypath problems/#1/source.tex}{\input{\mypath problems/#1/source.tex}}{%
+		\protect\IfFileExists{\mypath problems/#1/../source_\primaryLanguage.tex}{\input{\mypath problems/#1/../source_\primaryLanguage.tex}}{%
+		\protect\IfFileExists{\mypath problems/#1/../source_\secondaryLanguage.tex}{\input{\mypath problems/#1/../source_\secondaryLanguage.tex}}{%
+		\protect\IfFileExists{\mypath problems/#1/../source.tex}{\input{\mypath problems/#1/../source.tex}}{%
+		}}}}}}}
+
+\newcommand{\numberfoe}[1]{%
+		\protect\IfFileExists{\mypath problems/#1/number.tex}{\input{\mypath problems/#1/number.tex}}{}%
+}
+
+\newcommand{\source}[1]{%
+	\protect\sourcefoe{#1}\unskip\protect\IfProblemHasNumber{#1}{,{\ }\protect\numberfoe{#1}\unskip}{}%
+}
+
+\newcommand{\problem}[2][]{%
+	\IfProblemHasSource{#2}{%
+		\begin{prob}[\protect\source{#2}]
+			\problemfoe{#2#1}
+		\end{prob}
+		}{
+		\begin{prob}
+			\problemfoe{#2#1}
+		\end{prob}
+		}
+}
+
+\WithSuffix\newcommand\problem*[1]{
+	\begin{prob}
+		\problemfoe{#1}
+	\end{prob}
+}
+
+\newcommand{\solution}[2][]{
+	\begin{sol}
+		\solutionfoe{#2#1}
+	\end{sol}
+}

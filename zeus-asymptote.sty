@@ -1,0 +1,21 @@
+\ProvidesPackage{zeus-asymptote}[2020/03/27 Zeus's asymptote Package]
+
+% This package creates commonly used theorem-like environments, with easy setup for new patterns.
+
+\usepackage{asymptote}
+
+\def\asydir{asymptote}
+
+\begin{asydef}
+	import olympiad;
+	import cse;
+
+	defaultpen(fontsize(10pt));
+	size(8cm); // set a reasonable default
+	usepackage("amsmath");
+	usepackage("amssymb");
+	settings.tex="pdflatex";
+	settings.outformat="pdf";
+\end{asydef}
+
+
