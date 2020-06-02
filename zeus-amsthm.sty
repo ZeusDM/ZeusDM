@@ -28,26 +28,37 @@
 \newif\ifzeus@amsthmclassic
 \newif\ifzeus@amsthmobm
 \newif\ifzeus@amsthmobmtwo
+\newif\ifzeus@amsthmwoname
 
 \DeclareOption{stylish}{\zeus@amsthmstylishtrue
 						\zeus@amsthmclassicfalse
 						\zeus@amsthmobmfalse
-						\zeus@amsthmobmtwofalse}
+						\zeus@amsthmobmtwofalse
+						\zeus@amsthmwonamefalse}
 
 \DeclareOption{classic}{\zeus@amsthmstylishfalse
 						\zeus@amsthmclassictrue
 						\zeus@amsthmobmfalse
-						\zeus@amsthmobmtwofalse}
+						\zeus@amsthmobmtwofalse
+						\zeus@amsthmwonamefalse}
 
 \DeclareOption{obm}{\zeus@amsthmstylishfalse
 					\zeus@amsthmclassicfalse
 					\zeus@amsthmobmtrue
-					\zeus@amsthmobmtwofalse}
+					\zeus@amsthmobmtwofalse
+					\zeus@amsthmwonamefalse}
 
 \DeclareOption{obmtwo}{\zeus@amsthmstylishfalse
 						\zeus@amsthmclassicfalse
 						\zeus@amsthmobmfalse
-						\zeus@amsthmobmtwotrue}
+						\zeus@amsthmobmtwotrue
+						\zeus@amsthmwonamefalse}
+
+\DeclareOption{woname}{\zeus@amsthmstylishfalse
+						\zeus@amsthmclassicfalse
+						\zeus@amsthmobmfalse
+						\zeus@amsthmobmtwofalse
+						\zeus@amsthmwonametrue}
 
 \ExecuteOptions{stylish}
 \ProcessOptions\relax
@@ -86,6 +97,21 @@
 	    ]{obmstyle}
 	\providecommand{\styleprob}{obmstyle}
 \fi
+\ifzeus@amsthmwoname
+	\declaretheoremstyle[
+		spaceabove = \topsep, spacebelow=\topsep,
+		headfont = \bfseries\normalsize,
+		notefont = \bfseries\normalsize, notebraces={(}{) },
+		bodyfont = \normalfont,
+		postheadspace = 0pt,
+		headindent=0pt,
+		headpunct = ,
+		headformat = {\llap{\smash{\NUMBER\hspace{-.1ex}.\hspace{1ex}}}\NOTE} % Optional theorem note
+	    ]{wonamestyle}
+	\renewcommand\thmt@space{}
+	\providecommand{\styleprob}{wonamestyle}
+\fi
+
 
 % Theorem Styles
 	% Fixed Theorem Styles
@@ -114,7 +140,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacethm,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customthm}
 
 		% customlem
@@ -137,7 +164,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacelem,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customlem}
 
 		% customprop
@@ -160,7 +188,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspaceprop,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customprop}
 
 		% customcor
@@ -183,7 +212,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacecor,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customcor}
 
 		% customdefn
@@ -206,7 +236,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacedefn,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customdefn}
 
 		% customconj
@@ -229,7 +260,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspaceconj,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customconj}
 
 		% customalg
@@ -252,7 +284,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacealg,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customalg}
 
 		% customexmp
@@ -275,7 +308,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspaceexmp,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customexmp}
 
 		% customprob
@@ -298,7 +332,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspaceprob,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customprob}
 
 		% customrem
@@ -311,7 +346,7 @@
 			\newlength\postheadspacerem
 			\setlength\postheadspacerem{0.5em}
 			\providecommand{\fontrem}{}
-			\providecommand{\headfontrem}{\defaultheadfont}
+			\providecommand{\headfontrem}{\itshape}
 			\providecommand{\notefontrem}{}
 			\providecommand{\stylerem}{customrem}
 			\declaretheoremstyle[
@@ -321,7 +356,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacerem,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customrem}
 
 		% customnote
@@ -334,7 +370,7 @@
 			\newlength\postheadspacenote
 			\setlength\postheadspacenote{0.5em}
 			\providecommand{\fontnote}{}
-			\providecommand{\headfontnote}{\defaultheadfont}
+			\providecommand{\headfontnote}{\itshape}
 			\providecommand{\notefontnote}{}
 			\providecommand{\stylenote}{customnote}
 			\declaretheoremstyle[
@@ -344,7 +380,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacenote,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customnote}
 
 		% customsol
@@ -367,7 +404,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacesol,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customsol}
 
 		% customans
@@ -380,7 +418,7 @@
 			\newlength\postheadspaceans
 			\setlength\postheadspaceans{0.5em}
 			\providecommand{\fontans}{}
-			\providecommand{\headfontans}{\defaultheadfont}
+			\providecommand{\headfontans}{\itshape}
 			\providecommand{\notefontans}{}
 			\providecommand{\styleans}{customans}
 			\declaretheoremstyle[
@@ -390,7 +428,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspaceans,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customans}
 
 		% customhnt
@@ -403,7 +442,7 @@
 			\newlength\postheadspacehnt
 			\setlength\postheadspacehnt{0.5em}
 			\providecommand{\fonthnt}{}
-			\providecommand{\headfonthnt}{\defaultheadfont}
+			\providecommand{\headfonthnt}{\itshape}
 			\providecommand{\notefonthnt}{}
 			\providecommand{\stylehnt}{customhnt}
 			\declaretheoremstyle[
@@ -413,7 +452,8 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacehnt,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customhnt}
 
 		% customdem
@@ -426,7 +466,7 @@
 			\newlength\postheadspacedem
 			\setlength\postheadspacedem{0.5em}
 			\providecommand{\fontdem}{}
-			\providecommand{\headfontdem}{\defaultheadfont}
+			\providecommand{\headfontdem}{\itshape}
 			\providecommand{\notefontdem}{}
 			\providecommand{\styledem}{customdem}
 			\declaretheoremstyle[
@@ -436,9 +476,33 @@
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacedem,
 			    qed=,
-			    headpunct = .
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customdem}
 
+		% customidea
+			\newlength\spaceaboveidea
+			\setlength\spaceaboveidea{\topsep}
+			\newlength\spacebelowidea
+			\setlength\spacebelowidea{\topsep}
+			\newlength\indentaboveidea
+			\setlength\indentaboveidea{0pt}
+			\newlength\postheadspaceidea
+			\setlength\postheadspaceidea{0.5em}
+			\providecommand{\fontidea}{}
+			\providecommand{\headfontidea}{\itshape}
+			\providecommand{\notefontidea}{}
+			\providecommand{\styleidea}{customidea}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveidea, spacebelow=\spacebelowidea,
+			    headfont=\headfontidea,
+			    notefont=\notefontidea, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceidea,
+			    qed=,
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
+			    ]{customidea}
 
 \declaretheorem[style = \stylethm, name = \protect\theoremname]{thm}
 \declaretheorem[style = \stylelem, name = \protect\lemmaname]{lem}
@@ -451,10 +515,11 @@
 \declaretheorem[style = \styleexmp, name = \protect\examplename]{exmp}
 \declaretheorem[style = \styleprob, name = \protect\problemname]{prob}
 
-\declaretheorem[style = \stylerem, name = \protect\remarkname]{rem}
-\declaretheorem[style = \stylenote, name = \protect\notename]{note}
+\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
+\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
 
 \declaretheorem[style = \stylesol, name = \protect\solutionname, unnumbered]{sol}
-\declaretheorem[style = \styleans, name = \protect\answername]{ans}
-\declaretheorem[style = \stylehnt, name = \protect\hintname]{hnt}
-\declaretheorem[style = \styledem, name = \protect\proofname]{dem}
+\declaretheorem[style = \styleans, name = \protect\answername, unnumbered]{ans}
+\declaretheorem[style = \stylehnt, name = \protect\hintname, unnumbered]{hnt}
+\declaretheorem[style = \styledem, name = \protect\proofname, unnumbered]{dem}
+\declaretheorem[style = \styleidea, name = \protect\ideaname, unnumbered]{idea}

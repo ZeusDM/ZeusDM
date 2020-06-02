@@ -3,8 +3,64 @@
 % This package is used for making options easier.
 % This functionality is not ready yet, so it only \RequirePackage other Zeus's Packages.
 
+\DeclareOption{material}{}
+\DeclareOption{problem-list}{
+	\PassOptionsToPackage{woname}{zeus-amsthm}
+}
+\DeclareOption{booklet}{
+	\PassOptionsToPackage{obmtwo}{zeus-amsthm}
+}
+\DeclareOption{contest}{
+	\PassOptionsToPackage{obmtwo}{zeus-amsthm}
+	\PassOptionsToPackage{hide}{zeus-problems-db}
+}
+
+\DeclareOption{mm}{
+	\PassOptionsToPackage{mm}{zeus-color}
+}
+\DeclareOption{mit}{
+	\PassOptionsToPackage{mit}{zeus-color}
+}
+\DeclareOption{haverford}{
+	\PassOptionsToPackage{haverford}{zeus-color}
+}
+\DeclareOption{pensi}{
+	\PassOptionsToPackage{pensi}{zeus-color}
+}
+
+\DeclareOption{global}{
+	\PassOptionsToPackage{global}{zeus-amsthm}
+}
+\DeclareOption{section}{
+	\PassOptionsToPackage{section}{zeus-amsthm}
+}
+\DeclareOption{chapter}{
+	\PassOptionsToPackage{chapter}{zeus-amsthm}
+}
+
+\DeclareOption{stylish}{
+	\PassOptionsToPackage{stylish}{zeus-amsthm}
+}
+\DeclareOption{classic}{
+	\PassOptionsToPackage{classic}{zeus-amsthm}
+}
+\DeclareOption{obm}{
+	\PassOptionsToPackage{obm}{zeus-amsthm}
+}
+\DeclareOption{obmtwo}{
+	\PassOptionsToPackage{obmtwo}{zeus-amsthm}
+}
+
+\DeclareOption{hide}{
+	\PassOptionsToPackage{hide}{zeus-problems-db}
+}
+
+\DeclareOption{show}{
+	\PassOptionsToPackage{show}{zeus-problems-db}
+}
 
 
+\ProcessOptions\relax
 
 \RequirePackage{zeus-problems-db}
 \RequirePackage{zeus-title}

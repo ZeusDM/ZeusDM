@@ -1,18 +1,27 @@
 \ProvidesPackage{zeus-problems-db}[2020/03/27 Zeus's Database Input Package]
 
+\newif\ifzeus@hide
+
+\DeclareOption{hide}{\zeus@hidetrue}
+\DeclareOption{show}{\zeus@hidefalse}
+
+\ExecuteOptions{show}
+\ProcessOptions\relax
+
 % \RequirePackage{...}
 
 \RequirePackage{import}
 \RequirePackage{suffix}
 \RequirePackage{zeus-problems-db-folder}	% to previously define \mypath
-\RequirePackage{zeus-shortcuts}			% because some problems use it
-\RequirePackage{zeus-asymptote}			% because some problems use it
+\RequirePackage{zeus-shortcuts}				% because some problems use it
+\RequirePackage{zeus-asymptote}				% because some problems use it
 \RequirePackage{zeus-amsthm}				% to previously define
+\RequirePackage{enumitem}					% because some problems use it
 
 % This package mainly serves as an interface for extracting problems and solutions from the database.
 
-\def\primaryLanguage{pt}
-\def\secondaryLanguage{en}
+\def\primaryLanguage{pt}    % default values
+\def\secondaryLanguage{en}  % default values
 
 % Defines how to get exercises and solutions from the database
 
@@ -68,17 +77,25 @@
 	\protect\sourcefoe{#1}\unskip\protect\IfProblemHasNumber{#1}{,{\ }\protect\numberfoe{#1}\unskip}{}%
 }
 
-\newcommand{\problem}[2][]{%
-	\IfProblemHasSource{#2}{%
-		\begin{prob}[\protect\source{#2}]
-			\problemfoe{#2#1}
-		\end{prob}
-		}{
+\ifzeus@hide
+	\newcommand{\problem}[1]{
 		\begin{prob}
-			\problemfoe{#2#1}
+			\problemfoe{#1}
 		\end{prob}
-		}
-}
+	}
+\else
+	\newcommand{\problem}[1]{%
+		\IfProblemHasSource{#1}{%
+			\begin{prob}[\protect\source{#1}]
+				\problemfoe{#1}
+			\end{prob}
+			}{
+			\begin{prob}
+				\problemfoe{#1}
+			\end{prob}
+			}
+	}
+\fi
 
 \WithSuffix\newcommand\problem*[1]{
 	\begin{prob}

@@ -1,0 +1,12 @@
+\ProvidesPackage{zeuslivreto}
+
+\RequiresPackage{zeusproblems}
+
+\newcommand{\contest_day}[5]{ %[prefix/, year, suffix/, first_problem, last_problem]
+	\foreach \problemnumber in {#4, ..., #5}
+		{
+			\problem*{#1#2/#3\problemnumber}
+
+		}
+}
+
