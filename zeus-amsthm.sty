@@ -98,9 +98,10 @@
 	\providecommand{\styleprob}{obmstyle}
 \fi
 \ifzeus@amsthmwoname
+	\RequirePackage{zeus-color}
 	\declaretheoremstyle[
 		spaceabove = \topsep, spacebelow=\topsep,
-		headfont = \bfseries\normalsize,
+		headfont = \bfseries\normalsize\color{main},
 		notefont = \bfseries\normalsize, notebraces={(}{) },
 		bodyfont = \normalfont,
 		postheadspace = 0pt,
@@ -475,7 +476,7 @@
 			    notefont=\notefontdem, notebraces={(}{)},
 			    bodyfont=\normalfont,
 			    postheadspace=\postheadspacedem,
-			    qed=,
+				qed={$\square$},
 			    headpunct =.,
 			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customdem}

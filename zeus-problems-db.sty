@@ -5,7 +5,11 @@
 \DeclareOption{hide}{\zeus@hidetrue}
 \DeclareOption{show}{\zeus@hidefalse}
 
-\ExecuteOptions{show}
+\newif\ifzeus@link
+\DeclareOption{link}{\zeus@linktrue}
+\DeclareOption{nolink}{\zeus@linkfalse}
+
+\ExecuteOptions{show, link}
 \ProcessOptions\relax
 
 % \RequirePackage{...}
@@ -17,6 +21,8 @@
 \RequirePackage{zeus-asymptote}				% because some problems use it
 \RequirePackage{zeus-amsthm}				% to previously define
 \RequirePackage{enumitem}					% because some problems use it
+\RequirePackage{hyperref}					% to create hyperlinks to AoPS
+\RequirePackage{fontawesome}
 
 % This package mainly serves as an interface for extracting problems and solutions from the database.
 
@@ -36,6 +42,10 @@
 
 \newcommand{\IfProblemHasNumber}[3]{%
 	\protect\IfFileExists{\mypath problems/#1/number.tex}{#2}{#3}%
+}
+
+\newcommand{\IfProblemHasLink}[3]{%
+	\protect\IfFileExists{\mypath problems/#1/url.tex}{#2}{#3}%
 }
 
 \newcommand{\IfProblemExists}[3]{%
@@ -71,6 +81,10 @@
 
 \newcommand{\numberfoe}[1]{%
 		\protect\IfFileExists{\mypath problems/#1/number.tex}{\input{\mypath problems/#1/number.tex}}{}%
+}
+
+\newcommand{\linkfoe}[1]{%
+		\IfFileExists{\mypath problems/#1/url.tex}{\input{\mypath problems/#1/url.tex}}{}%
 }
 
 \newcommand{\source}[1]{%
