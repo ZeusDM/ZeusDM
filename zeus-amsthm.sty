@@ -198,11 +198,9 @@
 		}
 		\declaretheoremstyle[
 			headfont=\bfseries\sffamily\color{ForestGreen!70!black},
-			bodyfont=\normalfont,
-			spaceabove=2pt,
-			spacebelow=1pt,
 			mdframed={style=mdgreenbox},
-			headpunct={ --- },
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
 		]{thmgreenbox}
 		\mdfdefinestyle{mdblackbox}{%
 			skipabove=8pt,
@@ -234,6 +232,8 @@
 
 		\ifzeus@probmdthm
 			\providecommand{\styleprob}{thmredbox}
+			\providecommand{\styleques}{thmredbox}
+			\providecommand{\styleexer}{thmredbox}
 		\fi
 	\fi
 
@@ -458,6 +458,54 @@
 			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customprob}
 
+		% customques
+			\newlength\spaceaboveques
+			\setlength\spaceaboveques{\topsep}
+			\newlength\spacebelowques
+			\setlength\spacebelowques{\topsep}
+			\newlength\indentaboveques
+			\setlength\indentaboveques{0pt}
+			\newlength\postheadspaceques
+			\setlength\postheadspaceques{0.5em}
+			\providecommand{\fontques}{}
+			\providecommand{\headfontques}{\defaultheadfont}
+			\providecommand{\notefontques}{}
+			\providecommand{\styleques}{customques}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveques, spacebelow=\spacebelowques,
+			    headfont=\headfontques,
+			    notefont=\notefontques, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceques,
+			    qed=,
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
+			    ]{customques}
+
+		% customexer
+			\newlength\spaceaboveexer
+			\setlength\spaceaboveexer{\topsep}
+			\newlength\spacebelowexer
+			\setlength\spacebelowexer{\topsep}
+			\newlength\indentaboveexer
+			\setlength\indentaboveexer{0pt}
+			\newlength\postheadspaceexer
+			\setlength\postheadspaceexer{0.5em}
+			\providecommand{\fontexer}{}
+			\providecommand{\headfontexer}{\defaultheadfont}
+			\providecommand{\notefontexer}{}
+			\providecommand{\styleexer}{customexer}
+			\declaretheoremstyle[
+			    spaceabove = \spaceaboveexer, spacebelow=\spacebelowexer,
+			    headfont=\headfontexer,
+			    notefont=\notefontexer, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspaceexer,
+			    qed=,
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
+			    ]{customexer}
+
 		% customrem
 			\newlength\spaceaboverem
 			\setlength\spaceaboverem{\topsep}
@@ -503,8 +551,7 @@
 			    postheadspace=\postheadspacenote,
 			    qed=,
 			    headpunct =.,
-			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
-			    ]{customnote}
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}} ]{customnote}
 
 		% customsol
 			\newlength\spaceabovesol
@@ -661,6 +708,8 @@
 	
 	\declaretheorem[style = \styleexmp, name = \protect\examplename]{exmp}
 	\declaretheorem[style = \styleprob, name = \protect\problemname]{prob}
+	\declaretheorem[style = \styleques, name = \protect\questionname, sibling = prob]{ques}
+	\declaretheorem[style = \styleques, name = \protect\exercisename, sibling = prob]{exer}
 	
 	\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
 	\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
@@ -684,6 +733,8 @@
 	
 	\declaretheorem[style = \styleexmp, name = \protect\examplename, parent=chapter]{exmp}
 	\declaretheorem[style = \styleprob, name = \protect\problemname, parent=chapter]{prob}
+	\declaretheorem[style = \styleques, name = \protect\questionname, sibling = prob]{ques}
+	\declaretheorem[style = \styleques, name = \protect\exercisename, sibling = prob]{exer}
 	
 	\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
 	\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
@@ -707,6 +758,8 @@
 	
 	\declaretheorem[style = \styleexmp, name = \protect\examplename, parent=section]{exmp}
 	\declaretheorem[style = \styleprob, name = \protect\problemname, parent=section]{prob}
+	\declaretheorem[style = \styleques, name = \protect\questionname, sibling = prob]{ques}
+	\declaretheorem[style = \styleques, name = \protect\exercisename, sibling = prob]{exer}
 	
 	\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
 	\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
