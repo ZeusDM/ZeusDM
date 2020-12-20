@@ -1,3 +1,0 @@
-+ Add a custom way to type items in questions (e.g., (a), (b), etc.). 
-+ Add support to links (e.g. link to the AoPS forum page).
-+ Add support to BibTex, citations, etc.

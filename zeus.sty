@@ -4,6 +4,9 @@
 % This functionality is not ready yet, so it only \RequirePackage other Zeus's Packages.
 
 \DeclareOption{material}{}
+\DeclareOption{pset}{
+	\PassOptionsToPackage{woname}{zeus-amsthm}
+}
 \DeclareOption{problem-list}{
 	\PassOptionsToPackage{woname}{zeus-amsthm}
 }
@@ -49,6 +52,22 @@
 }
 \DeclareOption{obmtwo}{
 	\PassOptionsToPackage{obmtwo}{zeus-amsthm}
+}
+
+\DeclareOption{boxed}{
+	\PassOptionsToPackage{boxed}{zeus-amsthm}
+}
+\DeclareOption{thm-boxed}{
+	\PassOptionsToPackage{thm-boxed}{zeus-amsthm}
+}
+\DeclareOption{prob-boxed}{
+	\PassOptionsToPackage{prob-boxed}{zeus-amsthm}
+}
+\DeclareOption{rem-boxed}{
+	\PassOptionsToPackage{rem-boxed}{zeus-amsthm}
+}
+\DeclareOption{dem-boxed}{
+	\PassOptionsToPackage{dem-boxed}{zeus-amsthm}
 }
 
 \DeclareOption{hide}{

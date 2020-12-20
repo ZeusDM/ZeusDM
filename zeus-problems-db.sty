@@ -21,13 +21,14 @@
 \RequirePackage{zeus-asymptote}				% because some problems use it
 \RequirePackage{zeus-amsthm}				% to previously define
 \RequirePackage{enumitem}					% because some problems use it
-\RequirePackage{hyperref}					% to create hyperlinks to AoPS
+\RequirePackage{hyperref}					% to create hyperlinks to online solutions
+\RequirePackage{catchfile}
 \RequirePackage{fontawesome}
 
 % This package mainly serves as an interface for extracting problems and solutions from the database.
 
-\def\primaryLanguage{pt}    % default values
-\def\secondaryLanguage{en}  % default values
+\providecommand\primaryLanguage{pt}    % default values
+\providecommand\secondaryLanguage{en}  % default values
 
 % Defines how to get exercises and solutions from the database
 
@@ -84,11 +85,14 @@
 }
 
 \newcommand{\linkfoe}[1]{%
-		\IfFileExists{\mypath problems/#1/url.tex}{\input{\mypath problems/#1/url.tex}}{}%
+		\IfFileExists{\mypath problems/#1/url.tex}{
+			\CatchFileDef{\linkfoefoe}{\mypath problems/#1/url.tex}{\endlinechar=-1}
+	}{}%
 }
 
 \newcommand{\source}[1]{%
 	\protect\sourcefoe{#1}\unskip\protect\IfProblemHasNumber{#1}{,{\ }\protect\numberfoe{#1}\unskip}{}%
+	{\footnotesize\IfProblemHasLink{#1}{\linkfoe{#1}\href{\linkfoefoe}{\faExternalLink}}{}}%
 }
 
 \ifzeus@hide

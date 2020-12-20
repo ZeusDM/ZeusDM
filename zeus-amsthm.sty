@@ -4,6 +4,18 @@
 
 % \DeclareOption{...}{...}
 
+\newif\ifzeus@mdthm
+\newif\ifzeus@thmmdthm
+\newif\ifzeus@probmdthm
+\newif\ifzeus@remmdthm
+\newif\ifzeus@demmdthm
+
+\DeclareOption{boxed}{\zeus@mdthmtrue}
+\DeclareOption{thm-boxed}{\zeus@mdthmtrue \zeus@thmmdthmtrue}
+\DeclareOption{prob-boxed}{\zeus@mdthmtrue \zeus@probmdthmtrue}
+\DeclareOption{rem-boxed}{\zeus@mdthmtrue \zeus@remmdthmtrue}
+\DeclareOption{dem-boxed}{\zeus@mdthmtrue \zeus@demmdthmtrue}
+
 % global / chapter / section
 
 \newif\ifzeus@amsthmglobal
@@ -60,7 +72,7 @@
 						\zeus@amsthmobmtwofalse
 						\zeus@amsthmwonametrue}
 
-\ExecuteOptions{stylish}
+\ExecuteOptions{stylish, global}
 \ProcessOptions\relax
 
 % \RequirePackage{...}
@@ -113,9 +125,118 @@
 	\providecommand{\styleprob}{wonamestyle}
 \fi
 
-
 % Theorem Styles
 	% Fixed Theorem Styles
+
+	\ifzeus@mdthm
+		\RequirePackage[framemethod=TikZ]{mdframed}
+
+		\mdfdefinestyle{mdbluebox}{%
+			skipabove=4pt,
+			skipbelow=4pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linewidth=2pt,
+			linecolor=MidnightBlue,
+			nobreak=true,
+			backgroundcolor=MidnightBlue!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{MidnightBlue},
+			mdframed={style=mdbluebox},
+			headpunct={\par\\[3pt]\noindent},
+			postheadspace={0pt}
+		]{thmbluebox}
+		\mdfdefinestyle{mdtealbox}{%
+			skipabove=4pt,
+			skipbelow=4pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linewidth=2pt,
+			linecolor=TealBlue!60!MidnightBlue,
+			nobreak=true,
+			backgroundcolor=TealBlue!6!MidnightBlue!4,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{TealBlue!60!MidnightBlue},
+			mdframed={style=mdtealbox},
+			headpunct={\par\\[3pt]\noindent},
+			postheadspace={0pt}
+		]{thmtealbox}
+		\mdfdefinestyle{mdredbox}{%
+			skipabove=4pt,
+			skipbelow=4pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linewidth=2pt,
+			nobreak=true,
+			backgroundcolor=Salmon!5,
+			linecolor=RawSienna,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{RawSienna},
+			mdframed={style=mdredbox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
+		]{thmredbox}
+		\mdfdefinestyle{mdgreenbox}{%
+			skipabove=4pt,
+			skipbelow=4pt,
+			linewidth=2pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linecolor=ForestGreen,
+			backgroundcolor=ForestGreen!5,
+		}
+		\declaretheoremstyle[
+			headfont=\bfseries\sffamily\color{ForestGreen!70!black},
+			bodyfont=\normalfont,
+			spaceabove=2pt,
+			spacebelow=1pt,
+			mdframed={style=mdgreenbox},
+			headpunct={ --- },
+		]{thmgreenbox}
+		\mdfdefinestyle{mdblackbox}{%
+			skipabove=8pt,
+			linewidth=3pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linecolor=black,
+			backgroundcolor=RedViolet!5!gray!5,
+		}
+		\declaretheoremstyle[
+			headfont=\bfseries,
+			bodyfont=\normalfont\small,
+			spaceabove=0pt,
+			spacebelow=0pt,
+			mdframed={style=mdblackbox}
+		]{thmblackbox}
+
+
+		\providecommand{\stylethm}{thmbluebox}
+		\providecommand{\stylelem}{thmbluebox}
+		\providecommand{\styleprop}{thmbluebox}
+		\providecommand{\stylecor}{thmbluebox}
+		\providecommand{\styledefn}{thmtealbox}
+		\providecommand{\styleconj}{thmgreenbox}
+		\providecommand{\stylealg}{thmgreenbox}
+		\providecommand{\styleexmp}{thmredbox}
+
+		\ifzeus@probmdthm
+			\providecommand{\styleprob}{thmredbox}
+		\fi
+	\fi
+
 
 	% Customizable Theorem Styles
 
@@ -409,6 +530,30 @@
 			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customsol}
 
+		% customsk
+			\newlength\spaceabovesk
+			\setlength\spaceabovesk{\topsep}
+			\newlength\spacebelowsk
+			\setlength\spacebelowsk{\topsep}
+			\newlength\indentabovesk
+			\setlength\indentabovesk{0pt}
+			\newlength\postheadspacesk
+			\setlength\postheadspacesk{0.5em}
+			\providecommand{\fontsk}{}
+			\providecommand{\headfontsk}{\itshape}
+			\providecommand{\notefontsk}{}
+			\providecommand{\stylesk}{customsol}
+			\declaretheoremstyle[
+			    spaceabove = \spaceabovesk, spacebelow=\spacebelowsol,
+			    headfont=\headfontsk,
+			    notefont=\notefontsk, notebraces={(}{)},
+			    bodyfont=\normalfont,
+			    postheadspace=\postheadspacesk,
+			    qed=,
+			    headpunct =.,
+			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
+			    ]{customsk}
+
 		% customans
 			\newlength\spaceaboveans
 			\setlength\spaceaboveans{\topsep}
@@ -505,22 +650,71 @@
 			    headformat = {\mbox{\NAME{} \NUMBER\unskip\NOTE}}
 			    ]{customidea}
 
-\declaretheorem[style = \stylethm, name = \protect\theoremname]{thm}
-\declaretheorem[style = \stylelem, name = \protect\lemmaname]{lem}
-\declaretheorem[style = \styleprop, name = \protect\propositionname]{prop}
-\declaretheorem[style = \stylecor, name = \protect\corollaryname]{cor}
-\declaretheorem[style = \styledefn, name = \protect\definitionname]{defn}
-\declaretheorem[style = \styleconj, name = \protect\conjecturename]{conj}
-\declaretheorem[style = \stylealg, name = \protect\algorithmname]{alg}
+\ifzeus@amsthmglobal
+	\declaretheorem[style = \stylethm, name = \protect\theoremname]{thm}
+	\declaretheorem[style = \stylelem, name = \protect\lemmaname, sibling = thm]{lem}
+	\declaretheorem[style = \styleprop, name = \protect\propositionname, sibling = thm]{prop}
+	\declaretheorem[style = \stylecor, name = \protect\corollaryname, sibling = thm]{cor}
+	\declaretheorem[style = \styledefn, name = \protect\definitionname, sibling = thm]{defn}
+	\declaretheorem[style = \styleconj, name = \protect\conjecturename, sibling = thm]{conj}
+	\declaretheorem[style = \stylealg, name = \protect\algorithmname, sibling = thm]{alg}
+	
+	\declaretheorem[style = \styleexmp, name = \protect\examplename]{exmp}
+	\declaretheorem[style = \styleprob, name = \protect\problemname]{prob}
+	
+	\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
+	\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
+	
+	\declaretheorem[style = \stylesol, name = \protect\solutionname, unnumbered]{sol}
+	\declaretheorem[style = \stylesk, name = \protect\sketchname, unnumbered]{sk}
+	\declaretheorem[style = \styleans, name = \protect\answername, unnumbered]{ans}
+	\declaretheorem[style = \stylehnt, name = \protect\hintname, unnumbered]{hnt}
+	\declaretheorem[style = \styledem, name = \protect\proofname, unnumbered]{dem}
+	\declaretheorem[style = \styleidea, name = \protect\ideaname, unnumbered]{idea}
+\fi
 
-\declaretheorem[style = \styleexmp, name = \protect\examplename]{exmp}
-\declaretheorem[style = \styleprob, name = \protect\problemname]{prob}
+\ifzeus@amsthmchapter
+	\declaretheorem[style = \stylethm, name = \protect\theoremname, parent=chapter]{thm}
+	\declaretheorem[style = \stylelem, name = \protect\lemmaname, sibling = thm]{lem}
+	\declaretheorem[style = \styleprop, name = \protect\propositionname, sibling = thm]{prop}
+	\declaretheorem[style = \stylecor, name = \protect\corollaryname, sibling = thm]{cor}
+	\declaretheorem[style = \styledefn, name = \protect\definitionname, sibling = thm]{defn}
+	\declaretheorem[style = \styleconj, name = \protect\conjecturename, sibling = thm]{conj}
+	\declaretheorem[style = \stylealg, name = \protect\algorithmname, sibling = thm]{alg}
+	
+	\declaretheorem[style = \styleexmp, name = \protect\examplename, parent=chapter]{exmp}
+	\declaretheorem[style = \styleprob, name = \protect\problemname, parent=chapter]{prob}
+	
+	\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
+	\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
+	
+	\declaretheorem[style = \stylesol, name = \protect\solutionname, unnumbered]{sol}
+	\declaretheorem[style = \stylesk, name = \protect\sketchname, unnumbered]{sk}
+	\declaretheorem[style = \styleans, name = \protect\answername, unnumbered]{ans}
+	\declaretheorem[style = \stylehnt, name = \protect\hintname, unnumbered]{hnt}
+	\declaretheorem[style = \styledem, name = \protect\proofname, unnumbered]{dem}
+	\declaretheorem[style = \styleidea, name = \protect\ideaname, unnumbered]{idea}
+\fi
 
-\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
-\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
-
-\declaretheorem[style = \stylesol, name = \protect\solutionname, unnumbered]{sol}
-\declaretheorem[style = \styleans, name = \protect\answername, unnumbered]{ans}
-\declaretheorem[style = \stylehnt, name = \protect\hintname, unnumbered]{hnt}
-\declaretheorem[style = \styledem, name = \protect\proofname, unnumbered]{dem}
-\declaretheorem[style = \styleidea, name = \protect\ideaname, unnumbered]{idea}
+\ifzeus@amsthmsection
+	\declaretheorem[style = \stylethm, name = \protect\theoremname, parent=section]{thm}
+	\declaretheorem[style = \stylelem, name = \protect\lemmaname, sibling = thm]{lem}
+	\declaretheorem[style = \styleprop, name = \protect\propositionname, sibling = thm]{prop}
+	\declaretheorem[style = \stylecor, name = \protect\corollaryname, sibling = thm]{cor}
+	\declaretheorem[style = \styledefn, name = \protect\definitionname, sibling = thm]{defn}
+	\declaretheorem[style = \styleconj, name = \protect\conjecturename, sibling = thm]{conj}
+	\declaretheorem[style = \stylealg, name = \protect\algorithmname, sibling = thm]{alg}
+	
+	\declaretheorem[style = \styleexmp, name = \protect\examplename, parent=section]{exmp}
+	\declaretheorem[style = \styleprob, name = \protect\problemname, parent=section]{prob}
+	
+	\declaretheorem[style = \stylerem, name = \protect\remarkname, unnumbered]{rem}
+	\declaretheorem[style = \stylenote, name = \protect\notename, unnumbered]{note}
+	
+	\declaretheorem[style = \stylesol, name = \protect\solutionname, unnumbered]{sol}
+	\declaretheorem[style = \stylesk, name = \protect\sketchname, unnumbered]{sk}
+	\declaretheorem[style = \styleans, name = \protect\answername, unnumbered]{ans}
+	\declaretheorem[style = \stylehnt, name = \protect\hintname, unnumbered]{hnt}
+	\declaretheorem[style = \styledem, name = \protect\proofname, unnumbered]{dem}
+	\declaretheorem[style = \styleidea, name = \protect\ideaname, unnumbered]{idea}
+\fi

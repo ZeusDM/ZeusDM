@@ -27,6 +27,7 @@
 
 		% Solution-like Theorems
 			\newcommand{\solutionname}{}
+			\newcommand{\sketchname}{}
 			\newcommand{\answername}{}
 			\newcommand{\hintname}{}
 			% \proofname alread exists
@@ -36,6 +37,9 @@
 
 % ENGLISH
 	% babel
+		\addto\captionsenglish{\def\primaryLanguage{en}}
+		\addto\captionsenglish{\def\secondaryLanguage{pt}}
+
 		\addto\captionsenglish{\renewcommand{\theoremname}{Theorem}}
 		\addto\captionsenglish{\renewcommand{\lemmaname}{Lemma}}
 		\addto\captionsenglish{\renewcommand{\propositionname}{Proposition}}
@@ -51,6 +55,7 @@
 		\addto\captionsenglish{\renewcommand{\notename}{Note}}
 		
 		\addto\captionsenglish{\renewcommand{\solutionname}{Solution}}
+		\addto\captionsenglish{\renewcommand{\sketchname}{Sketch}}
 		\addto\captionsenglish{\renewcommand{\answername}{Answer}}
 		\addto\captionsenglish{\renewcommand{\hintname}{Hint}}
 
@@ -72,6 +77,7 @@
 		\addto\captionsenglish{\crefname{note}{Note}{Notes}}
 		
 		\addto\captionsenglish{\crefname{sol}{Solution}{Solutions}}
+		\addto\captionsenglish{\crefname{sk}{Sketch}{Sketchs}}
 		\addto\captionsenglish{\crefname{ans}{Answer}{Answers}}
 		\addto\captionsenglish{\crefname{hnt}{Hint}{Hints}}
 
@@ -79,6 +85,9 @@
 
 % BRAZILIAN
 	% babel
+		\addto\captionsenglish{\def\primaryLanguage{en}}
+		\addto\captionsenglish{\def\secondaryLanguage{pt}}
+
 		\addto\captionsbrazilian{\renewcommand{\theoremname}{Teorema}}
 		\addto\captionsbrazilian{\renewcommand{\lemmaname}{Lema}}
 		\addto\captionsbrazilian{\renewcommand{\propositionname}{Proposição}}
@@ -94,6 +103,7 @@
 		\addto\captionsbrazilian{\renewcommand{\notename}{Nota}}
 		
 		\addto\captionsbrazilian{\renewcommand{\solutionname}{Solução}}
+		\addto\captionsbrazilian{\renewcommand{\sketchname}{Esboço}}
 		\addto\captionsbrazilian{\renewcommand{\answername}{Resposta}}
 		\addto\captionsbrazilian{\renewcommand{\hintname}{Dica}}
 
@@ -115,6 +125,7 @@
 		\addto\captionsbrazilian{\crefname{note}{Nota}{Notas}}
 		
 		\addto\captionsbrazilian{\crefname{sol}{Solução}{Soluções}}
+		\addto\captionsbrazilian{\crefname{sk}{Esboço}{Esboço}}
 		\addto\captionsbrazilian{\crefname{ans}{Resposta}{Respostas}}
 		\addto\captionsbrazilian{\crefname{hnt}{Dica}{Dicas}}
 
@@ -123,6 +134,9 @@
 
 % BRAZIL
 	% babel
+		\addto\captionsenglish{\def\primaryLanguage{en}}
+		\addto\captionsenglish{\def\secondaryLanguage{pt}}
+		
 		\addto\captionsbrazil{\renewcommand{\theoremname}{Teorema}}
 		\addto\captionsbrazil{\renewcommand{\lemmaname}{Lema}}
 		\addto\captionsbrazil{\renewcommand{\propositionname}{Proposição}}
@@ -138,10 +152,11 @@
 		\addto\captionsbrazil{\renewcommand{\notename}{Nota}}
 		
 		\addto\captionsbrazil{\renewcommand{\solutionname}{Solução}}
+		\addto\captionsbrazil{\renewcommand{\sketchname}{Esboço}}
 		\addto\captionsbrazil{\renewcommand{\answername}{Resposta}}
 		\addto\captionsbrazil{\renewcommand{\hintname}{Dica}}
 
-		\addto\captionsbrazilian{\renewcommand{\ideaname}{Ideia}}
+		\addto\captionsbrazil{\renewcommand{\ideaname}{Ideia}}
 
 	% cref
 		\addto\captionsbrazil{\crefname{thm}{Teorema}{Teoremas}}
@@ -159,7 +174,8 @@
 		\addto\captionsbrazil{\crefname{note}{Nota}{Notas}}
 		
 		\addto\captionsbrazil{\crefname{sol}{Solução}{Soluções}}
+		\addto\captionsbrazil{\crefname{sk}{Esboço}{Esboço}}
 		\addto\captionsbrazil{\crefname{ans}{Resposta}{Respostas}}
 		\addto\captionsbrazil{\crefname{hnt}{Dica}{Dicas}}
 
-		\addto\captionsbrazilian{\crefname{idea}{Ideia}{Ideias}}
+		\addto\captionsbrazil{\crefname{idea}{Ideia}{Ideias}}
